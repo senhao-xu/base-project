@@ -1,7 +1,7 @@
 package com.simon.server.common.limit.aop;
 
 import com.simon.server.common.limit.annotation.AccessIpLimiter;
-import com.simon.common.utils.IpUtils;
+import com.simon.server.utils.IpUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
