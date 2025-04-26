@@ -3,14 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tomato</groupId>
+    <groupId>com.simon</groupId>
     <artifactId>base-project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>base-project</name>
-    <description>base-project</description>
-
-    <!--  父模块的打包方式  -->
     <packaging>pom</packaging>
+    <description>base-project</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -24,9 +22,17 @@
         <module>base-server</module>
     </modules>
 
-
     <properties>
+        <!--项目版本-->
+        <revision>0.0.1-SNAPSHOT</revision>
+        <!--构建配置-->
         <java.version>1.8</java.version>
+        <target.java.version>1.8</target.java.version>
+        <maven.compiler.source>${target.java.version}</maven.compiler.source>
+        <maven.compiler.target>${target.java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--依赖库版本-->
         <spring.boot.version>2.7.15</spring.boot.version>
         <mysql.version>8.0.25</mysql.version>
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
@@ -40,18 +46,30 @@
         <commons-collections.version>3.2.2</commons-collections.version>
         <fastjson.version>1.2.78</fastjson.version>
         <knife4j.version>4.3.0</knife4j.version>
-        <admin.version>2.5.4</admin.version>
     </properties>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencyManagement>
         <dependencies>
-            <!-- SpringBoot的依赖配置-->
+            <!--本地依赖，按需引入-->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
+                <groupId>com.simon</groupId>
+                <artifactId>base-api</artifactId>
+                <version>${revision}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.simon</groupId>
+                <artifactId>base-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
             <!--数据库连接驱动-->
             <dependency>
                 <groupId>mysql</groupId>
@@ -76,6 +94,7 @@
                 <artifactId>oshi-core</artifactId>
                 <version>${oshi.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>net.java.dev.jna</groupId>
                 <artifactId>jna</artifactId>
@@ -124,39 +143,8 @@
                 <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.tomato</groupId>
-                <artifactId>base-api</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.tomato</groupId>
-                <artifactId>base-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.tomato</groupId>
-                <artifactId>base-server</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-archetype-plugin</artifactId>
-                <version>3.2.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
