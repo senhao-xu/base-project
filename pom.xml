@@ -2,149 +2,138 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.simon</groupId>
-    <artifactId>base-project</artifactId>
-    <version>${revision}</version>
-    <name>base-project</name>
-    <packaging>pom</packaging>
-    <description>base-project</description>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.15</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
-    <modules>
-        <module>base-api</module>
-        <module>base-common</module>
-        <module>base-server</module>
-    </modules>
-
+    <groupId>com.simon</groupId>
+    <artifactId>baseProject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>baseProject</name>
+    <description>baseProject</description>
     <properties>
-        <!--项目版本-->
-        <revision>0.0.1-SNAPSHOT</revision>
-        <!--构建配置-->
-        <java.version>1.8</java.version>
-        <target.java.version>1.8</target.java.version>
-        <maven.compiler.source>${target.java.version}</maven.compiler.source>
-        <maven.compiler.target>${target.java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!--依赖库版本-->
-        <spring.boot.version>2.7.15</spring.boot.version>
-        <mysql.version>8.0.25</mysql.version>
-        <mybatis-plus.version>3.4.2</mybatis-plus.version>
-        <oshi.version>5.8.2</oshi.version>
-        <jna.version>5.9.0</jna.version>
-        <druid.version>1.2.8</druid.version>
-        <easyexcel.version>2.2.6</easyexcel.version>
-        <jodatime.version>2.10.1</jodatime.version>
-        <commons-io.version>2.11.0</commons-io.version>
-        <commons-fileupload.version>1.4</commons-fileupload.version>
-        <commons-collections.version>3.2.2</commons-collections.version>
-        <fastjson.version>1.2.78</fastjson.version>
-        <knife4j.version>4.3.0</knife4j.version>
+        <java.version>8</java.version>
     </properties>
+    <dependencies>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </pluginRepository>
-    </pluginRepositories>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.5</version>
+        </dependency>
 
-    <dependencyManagement>
-        <dependencies>
-            <!--本地依赖，按需引入-->
-            <dependency>
-                <groupId>com.simon</groupId>
-                <artifactId>base-api</artifactId>
-                <version>${revision}</version>
-            </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+            <version>4.5.0</version>
+        </dependency>
 
-            <dependency>
-                <groupId>com.simon</groupId>
-                <artifactId>base-common</artifactId>
-                <version>${revision}</version>
-            </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-            <!--数据库连接驱动-->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
-            </dependency>
-            <!-- 阿里数据库连接池 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
-            <!--Mybatis-plus-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-            <!-- 获取系统信息 -->
-            <dependency>
-                <groupId>com.github.oshi</groupId>
-                <artifactId>oshi-core</artifactId>
-                <version>${oshi.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-            <dependency>
-                <groupId>net.java.dev.jna</groupId>
-                <artifactId>jna</artifactId>
-                <version>${jna.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.java.dev.jna</groupId>
-                <artifactId>jna-platform</artifactId>
-                <version>${jna.version}</version>
-            </dependency>
-            <!--Excel工具类-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>easyexcel</artifactId>
-                <version>${easyexcel.version}</version>
-            </dependency>
-            <!--日期时间工具-->
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>${jodatime.version}</version>
-            </dependency>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>4.0.5</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <!-- 默认绑定阶段initialize -->
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- When set to `true`, the plugin will not try to contact any remote repositories.
+                        Any operations will only use the local state of the repo. If set to `false`, it will
+                        execute `git fetch` operations e.g. to determine the `ahead` and `behind` branch
+                        information. -->
+                    <offline>true</offline>
+                    <!--日期格式;默认值:dd.MM.yyyy '@' HH:mm:ss z;-->
+                    <dateFormat>yyyy-MM-dd_HH-mm-ss</dateFormat>
+                    <!--,构建过程中,是否打印详细信息;默认值:false;-->
+                    <verbose>true</verbose>
+                    <!-- ".git"文件路径;默认值:${project.basedir}/.git; ${project.basedir}：项目根目录，即包含pom.xml文件的目录-->
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <!--若项目打包类型为pom,是否取消构建;默认值:true;-->
+                    <skipPoms>true</skipPoms>
+                    <!--是否生成"git.properties"文件;默认值:false;-->
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <!--指定"git.properties"文件的存放路径(相对于${project.basedir}的一个路径);-->
+                    <generateGitPropertiesFilename>/target/classes/git.properties</generateGitPropertiesFilename>
+                    <!--".git"文件夹未找到时,构建是否失败;若设置true,则构建失败;若设置false,则跳过执行该目标;默认值:true;-->
+                    <failOnNoGitDirectory>true</failOnNoGitDirectory>
 
-            <!-- io常用工具类 -->
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons-io.version}</version>
-            </dependency>
+                    <!--git描述配置,可选;由JGit提供实现;-->
+                    <gitDescribe>
+                        <!--是否生成描述属性-->
+                        <skip>false</skip>
+                        <!--提交操作未发现tag时,仅打印提交操作ID,-->
+                        <always>false</always>
+                        <!--提交操作ID显式字符长度,最大值为:40;默认值:7; 0代表特殊意义;后面有解释;-->
+                        <abbrev>8</abbrev>
+                        <!--构建触发时,代码有修改时(即"dirty state"),添加指定后缀;默认值:"";-->
+                        <dirty>-dirty</dirty>
+                        <!--always print using the "tag-commits_from_tag-g_commit_id-maybe_dirty" format, even if "on" a tag.
+                            The distance will always be 0 if you're "on" the tag.  -->
+                        <forceLongFormat>false</forceLongFormat>
+                    </gitDescribe>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-            <!-- collections工具类 -->
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>${commons-collections.version}</version>
-            </dependency>
-
-            <!-- 阿里JSON解析器 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>pord</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <profileActive>pord</profileActive>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
